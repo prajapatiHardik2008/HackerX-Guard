@@ -1,0 +1,7 @@
+opencv-python>=4.8.0
+deepface>=0.0.79
+gTTS>=2.3.2
+pygame>=2.5.2
+python-dotenv>=1.0.0
+werkzeug>=2.3.0
+tf-keras>=2.15.0
