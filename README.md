@@ -21,7 +21,7 @@ An AI-powered local authentication and security system that uses facial recognit
 
 ### 1. Clone the repository
 ```bash
-git clone 
+git clone https://github.com/prajapatiHardik2008/HackerX-Guard.git
 cd HackerX-Guard
 
 ```
