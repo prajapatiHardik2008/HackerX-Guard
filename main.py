@@ -1,3 +1,4 @@
+from asyncio import subprocess
 import time
 from werkzeug.security import check_password_hash
 from gtts import gTTS
@@ -9,6 +10,7 @@ import os
 from dotenv import load_dotenv
 import msvcrt
 import sys
+import subprocess
 load_dotenv() 
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'   
 def input_with_timeout(prompt, timeout=10):
@@ -116,7 +118,17 @@ if __name__ == "__main__":
         if res:
             print("✅ Identity verified! , wELCOME BACK H-24 HOW IT'S GOING ? ")
             os.remove("captured_image.jpg")  # Clean up the captured image
-            speak("Identity verified! , wELCOME BACK H-24 HOW IT'S GOING ? ")
+            speak("Identity verified! , wELCOME BACK H-24 HOW IT'S GOING ? , do you want to start Nexa right now ? yes/no")
+            user_response = input_with_timeout("Your response (yes/no): ", timeout=10)
+            if user_response and user_response.lower() == "yes":
+                python_executable = r"D:\Nexa\.venv\Scripts\python.exe" # past here your nexa python executable path
+            script_path = r"D:\Nexa\main.py" # past here your nexa script path
+            try:
+
+                subprocess.Popen([python_executable, script_path])
+                print("🚀 Nexa is starting...")
+            except Exception as e:
+                print(f"❌ Error starting Nexa: {e}")  
         elif res == False:
             print("❌ Identity verification failed. Access denied.")
             os.remove("captured_image.jpg")  # Clean up the captured image  
@@ -144,3 +156,5 @@ if __name__ == "__main__":
             print(f"❌ Error: {res}")
             os.remove("captured_image.jpg")  # Clean up the captured image
         time.sleep(10)  # Wait for 1 hour before next verification
+
+        
