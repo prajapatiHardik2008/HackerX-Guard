@@ -1,83 +1,72 @@
-# HackerX-Guard
+HackerX-Guard & Nexa Integration 🛡️🤖
+HackerX-Guard is an advanced AI-powered workstation security system, now seamlessly integrated with Nexa AI Assistant. This system uses facial recognition to grant access to your Windows workstation and, upon successful verification, automatically launches your Nexa AI assistant, transitioning your security guard into your digital companion.
 
+🚀 Features
+AI Authentication: Robust facial verification using the DeepFace framework and OpenCV.
 
-HackerX-Guard 🛡️👀
+Integrated Nexa AI: Automated trigger of Nexa AI immediately following successful identity verification.
 
-An AI-powered local authentication and security system that uses facial recognition to grant access to your Windows workstation. If an unauthorized face is detected, it triggers audio warnings, demands an encrypted access key within a specific timeout, and automatically locks down the system if verification fails ("Hacker X Mode").
+Intrusion Defense: Automated system lockdown ("Hacker X Mode") if unauthorized access or a timeout occurs.
 
-## 🚀 Features
+Interactive Intelligence: Voice-controlled automation (Nexa) and interactive security alerts (gTTS).
 
-*   **AI Facial Recognition:** Uses the `DeepFace` framework and OpenCV to capture and verify the user's identity against an owner image.
-*   **Voice Assistant Integration:** Uses Google Text-to-Speech (`gTTS`) and `pygame` to provide interactive voice prompts and security alerts.
-*   **Secure Access Key:** Fallback option using hashed passwords (`werkzeug.security`) if face verification fails.
-*   **Timed Input:** Uses custom Windows-native input loop with a 10-second countdown before auto-locking.
-*   **Automated Workstation Lock:** Instantly locks Windows using `ctypes` if an unauthorized intrusion or timeout occurs.
+🛠️ Prerequisites & Installation
+⚠️ Note: This project is optimized for Windows OS (utilizing ctypes.windll for system interaction).
 
----
+1. Clone the repositories
+You will need both repositories to complete the integration:
 
-## 🛠️ Prerequisites & Installation
-
-> ⚠️ **Note:** This project is designed specifically for **Windows OS** because it utilizes `msvcrt` for key-handling and `ctypes.windll` for locking the workstation.
-
-### 1. Clone the repository
-```bash
+Bash
+# Clone HackerX-Guard
 git clone https://github.com/prajapatiHardik2008/HackerX-Guard.git
 cd HackerX-Guard
 
-```
+# Clone Nexa AI
+git clone https://github.com/prajapatiHardik2008/Nexa.git
+2. Setup Environment & Dependencies
+It is best practice to maintain isolated virtual environments for each module:
 
-### 2. Install Dependencies
+Bash
+# Inside HackerX-Guard folder
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
 
-Make sure you have Python installed, then install the required libraries:
+# Inside Nexa folder
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
+3. Setup Integration
+In HackerX-Guard/main.py, update the path to point to your Nexa environment:
 
-```bash
-pip install opencv-python deepface gtts pygame python-dotenv werkzeug
+Open main.py.
 
-```
+Locate the python_executable variable and set it to the absolute path of your Nexa virtual environment (e.g., D:\Nexa\.venv\Scripts\python.exe).
 
-### 3. Setup Environment Variables
+4. Configuration
+.env: Create a .env file in the HackerX-Guard root and set your hashed ADMIN_KEY.
 
-Create a `.env` file in the root directory of the project and add your hashed admin key:
+Owner Image: Place a photo of yourself named h.jpeg in the HackerX-Guard root directory.
 
-```env
-ADMIN_KEY=your_werkzeug_pbkdf2_hashed_password_here
+💻 How to Use
+Start System: In the HackerX-Guard folder, run python main.py.
 
-```
+Authenticate: Look at the webcam to verify your identity.
 
-### 4. Add Owner Image
+Trigger Nexa: Once verified, the system will prompt: "Do you want to start Nexa right now?"
 
-Place a photo of your face in the root directory and name it `h.jpeg` (or change the `OWNER_IMAGE` variable in the script to match your image file name).
+Command: Say 'yes' to launch your Nexa AI assistant automatically!
 
----
+🔧 Architecture
+Authentication Layer: DeepFace & OpenCV.
 
-## 💻 How to Use
+Security Core: Ctypes (WinAPI) & Werkzeug.
 
-Simply run the main python script:
+Voice Intelligence: Nexa AI (OpenAI API, SpeechRecognition).
 
-```bash
-python main.py
+Process Orchestration: Subprocess (Environment-isolated execution).
+📄 License
+MIT License.
 
-```
-
-1. The script will ask you to look at the webcam.
-2. If it recognizes you, it will welcome you back.
-3. If it doesn't recognize the face, it will ask for a backup Access Key.
-4. If the wrong key is entered or the 10-second timer expires, **Hacker X mode activates** and locks your Windows machine immediately.
-
----
-
-## 🔧 Technologies Used
-
-* **Python 3.x**
-* **DeepFace** & **OpenCV** (Computer Vision & Face Verification)
-* **gTTS** & **Pygame Mixer** (Audio & Speech Synthesis)
-* **Werkzeug** (Secure Password Hashing)
-* **Ctypes** (Windows API Integration)
-
----
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](https://www.google.com/search?q=LICENSE).
-
----
+📄 License
+MIT License.
