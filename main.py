@@ -19,27 +19,27 @@ def input_with_timeout(prompt, timeout=10):
     user_input = ""
     
     while True:
-        # Check karo agar 10 seconds poore ho gaye hain
+        # Check if 10 sec. is complted 
         if time.time() - start_time > timeout:
             print("\n⏰ Time out! 10 seecons for input has passed.")
-            return None # Timer khatam, toh None return karega
+            return None # if time is finished then return none
 
-        # Check karo agar user ne koi key press ki hai
+        # check is user pressed any key ?
         if msvcrt.kbhit():
             char = msvcrt.getche().decode('utf-8')
-            if char == '\r': # '\r' matlab Enter key
-                print() # New line ke liye
+            if char == '\r': # '\r' 
+                print() # for new line 
                 return user_input
-            elif char == '\b': # Backspace handle karne ke liye
+            elif char == '\b': #  for Backspace 
                 if len(user_input) > 0:
                     user_input = user_input[:-1]
-                    # Screen par se aakhri char mitane ke liye
+                    
                     sys.stdout.write(' \b')
                     sys.stdout.flush()
             else:
                 user_input += char
                 
-        time.sleep(0.1) # CPU par load kam karne ke liye chota sa break
+        time.sleep(0.1) 
 
 
 def speak(Text):
